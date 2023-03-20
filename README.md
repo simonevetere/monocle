@@ -19,3 +19,5 @@ It is a sub-app for the PWA react app launcher
 ### JS to micropython/monocle
 
 I'm building on top of the bluetooth via JS capability (Chrome) provided by this [library](https://github.com/siliconwitchery/web-bluetooth-repl).
+
+Forked from https://github.com/jdc-cunningham/bl-monocle-reactjs-pwa/
