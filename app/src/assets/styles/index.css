@@ -1,0 +1,8 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #282828;
+}
+
+body * {
+  box-sizing: border-box;
+}
