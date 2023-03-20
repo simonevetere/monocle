@@ -6,6 +6,7 @@ import { render } from '../../mpython-common/render';
 import { borders } from '../../mpython-common/borders';
 import { date } from '../../mpython-common/date';
 import { touch } from '../../mpython-common/touch';
+import { gptapp } from '../gpt4/gptapp';
 import { welcome } from '../gpt4/welcome';
 
 let cmdRunner;
@@ -14,17 +15,9 @@ let btnChoice = 1; // 0 left, 1 right, default is right
 let curWorkout = 0;
 let set = 0;
 
-let workouts = {
-  'Squats': [0, 0, 0],
-  'Pushups': [0, 0, 0],
-  'Situps': [0, 0, 0],
-  // 'Curls': [0, 0, 0],
-  // 'Lat raise': [0, 0, 0] // can't see more, need scroll or smaller font
-};
-
-
 const showControls = () => {
   cmdRunner(borders(true));
+  cmdRunner(gptapp());
   cmdRunner(touch());
   cmdRunner(render());
 };
@@ -49,6 +42,10 @@ export const gpt4App = {
   run: (execMonocle) => {
     cmdRunner = execMonocle;
     splashScreen();
+    setTimeout(() => {
+      showControls();
+    }, 3000);
+    console.log(appScene);
   },
   leftBtnCallback: () => { // navigate
   console.log('appScene');
