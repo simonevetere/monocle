@@ -5,7 +5,6 @@ import WeightLiftingIcon from './assets/icons/uxwing_weight-lifting.svg';
 import { execMonocle } from './comms';
 import { gpt4App } from './apps/gpt4/gpt4';
 import React from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const App = () => {
   const [activeApp, setActiveApp] = useState(false);
@@ -29,13 +28,6 @@ const App = () => {
       gpt4App.rightBtnCallback();
     }
   }
-
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition()
 
   const loadedApp = (
     <div className="loaded-app">

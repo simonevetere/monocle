@@ -1,5 +1,4 @@
 import React from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { imports } from '../../mpython-common/imports';
 import { battery } from '../../mpython-common/battery';
 import { render } from '../../mpython-common/render';
@@ -8,12 +7,29 @@ import { date } from '../../mpython-common/date';
 import { touch } from '../../mpython-common/touch';
 import { gptapp } from '../gpt4/gptapp';
 import { welcome } from '../gpt4/welcome';
+import { writeText } from '../gpt4/writeText';
 
 let cmdRunner;
 let appScene = 'controls';
 let btnChoice = 1; // 0 left, 1 right, default is right
 let curWorkout = 0;
 let set = 0;
+
+const recognition = new window.webkitSpeechRecognition();
+recognition.lang = 'it-IT';
+
+recognition.onresult = (event) => {
+  const transcript = event.results[0][0].transcript;
+  const words = transcript.split(' ');
+
+  for (const parola of words) {
+    setTimeout(() => {
+      cmdRunner(writeText(parola));
+      cmdRunner(render());
+      console.log(Date.now())
+    }, 1500);
+  }  
+};
 
 const showControls = () => {
   cmdRunner(borders(true));
@@ -24,6 +40,7 @@ const showControls = () => {
 
 const splashScreen = () => {
   cmdRunner(welcome());
+  cmdRunner(imports());
   cmdRunner(render());
 }
 
@@ -37,7 +54,6 @@ const getDate = () => {
   return mm + '/' + dd + '/' + yyyy;
 }
 
-
 export const gpt4App = {
   run: (execMonocle) => {
     cmdRunner = execMonocle;
@@ -48,8 +64,7 @@ export const gpt4App = {
     console.log(appScene);
   },
   leftBtnCallback: () => { // navigate
-  console.log('appScene');
-  console.log('left');
+    recognition.stop();
   },
   rightBtnCallback: () => { 
   console.log(appScene);
@@ -62,7 +77,9 @@ export const gpt4App = {
 }
 
 const textToSpeech = () => {
-  console.log(SpeechRecognition.startListening);
+  recognition.start();
+  console.log('porcodio');
+  appScene = 'controls'
 }
 
 export default gpt4App;
