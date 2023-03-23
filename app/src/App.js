@@ -5,11 +5,34 @@ import WeightLiftingIcon from './assets/icons/uxwing_weight-lifting.svg';
 import { execMonocle } from './comms';
 import { gpt4App } from './apps/gpt4/gpt4';
 import React from 'react';
+import { JSEncrypt } from 'jsencrypt'
+import { CryptoJS } from 'crypto-js';
 
 const App = () => {
   const [activeApp, setActiveApp] = useState(false);
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
+  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState(false);
+  const key = "";
+  const public_key = new JSEncrypt();
+
+  const handleChange = event => {
+    setEmail(event.target.value);
+  };
+
+  const getkey = () => {
+    return fetch("http://localhost:8080/getkey");
+  }
+
+  const sendmail = (email) => {
+    const key = getkey();
+    public_key.setPublicKey(key);
+    const encrypted = public_key.encrypt(email);
+    
+    return fetch("http://localhost:8080/sendmail?mail="+ encrypted);
+  }
+
 
   const logger = async (msg) => {
     console.log('repl response', msg);
@@ -27,6 +50,15 @@ const App = () => {
     if (msg.trim() === 'trigger a') {
       gpt4App.rightBtnCallback();
     }
+  }
+
+  const checkmail = (email) => {
+    if(email.email == ""){
+      return false;
+    } else {
+      dologin(email);
+    }
+    console.log(email.email)
   }
 
   const loadedApp = (
@@ -56,11 +88,16 @@ const App = () => {
     ensureConnected(logger, relayCallback);
   }
 
+  const dologin = (email) => {
+    setLogin(sendmail(email));
+
+  }
+
   const intro = (
     <div className="intro">
-      <h1>Monocle</h1>
-      {connecting && <p>{connected ? 'Connected' : 'Connecting...'}</p>}
-      {!connecting && <button onClick={() => connect()}>Connect</button>}
+      {connecting && <><h1>Monocle</h1><p>{connected ? 'Connected' : 'Connecting...'}</p></>}
+      {!connecting && login && <><h1>Monocle</h1><button onClick={() => connect()}>Connect</button></>}
+      {!login && <><h1>Monocle</h1><p><br />plesase insert your email</p><input type="email" id="email" name="email" onChange={handleChange} value={email} placeholder="email@example.com" type="email"/><button onClick={() => checkmail({email})}>login</button></>}
       
     </div>
   );
@@ -75,7 +112,8 @@ const App = () => {
 
   return (
     <div className="App">
-      {(!connected && !activeApp) && intro}
+      {(!login ) && intro}
+      {(!connected && !activeApp && login) && intro}
       {(connected && !activeApp) && apps}
       {activeApp && loadedApp}
     </div>
