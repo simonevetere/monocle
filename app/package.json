@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set PUBLIC_URL=https://github.com/simonevetere/monocle&& workbox generateSW && react-scripts build react-scripts build",
+    "build": "set PUBLIC_URL=https://simonevetere.github.io/monocle&& workbox generateSW && react-scripts build react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
