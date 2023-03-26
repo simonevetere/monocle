@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "https://simonevetere.github.io/monocle/static/css/main.370acad1.css",
+    "main.css": "https://simonevetere.github.io/monocle/static/css/main.93a1974c.css",
     "main.js": "https://simonevetere.github.io/monocle/static/js/main.8c40c9d2.js",
     "static/js/787.c1112931.chunk.js": "https://simonevetere.github.io/monocle/static/js/787.c1112931.chunk.js",
-    "static/media/background.gif": "https://simonevetere.github.io/monocle/static/media/background.c0f520e46f8af016ddb6.gif",
+    "static/media/background.gif": "https://simonevetere.github.io/monocle/static/media/background.23b7aa1c191ac52e78ea.gif",
     "static/media/uxwing_weight-lifting.svg": "https://simonevetere.github.io/monocle/static/media/uxwing_weight-lifting.88913cc06488960fcc1a02dca78f362b.svg",
     "index.html": "https://simonevetere.github.io/monocle/index.html",
-    "main.370acad1.css.map": "https://simonevetere.github.io/monocle/static/css/main.370acad1.css.map",
+    "main.93a1974c.css.map": "https://simonevetere.github.io/monocle/static/css/main.93a1974c.css.map",
     "main.8c40c9d2.js.map": "https://simonevetere.github.io/monocle/static/js/main.8c40c9d2.js.map",
     "787.c1112931.chunk.js.map": "https://simonevetere.github.io/monocle/static/js/787.c1112931.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.370acad1.css",
+    "static/css/main.93a1974c.css",
     "static/js/main.8c40c9d2.js"
   ]
 }
